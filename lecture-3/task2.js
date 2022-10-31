@@ -13,56 +13,57 @@ rl.question('Enter the phrase: ', (phrase) => {
         return;
     }
 
-    phrase = Array.from(phrase)
-    let numArrayIndex = 0;
-    let numArray = new Array();
-
-    phrase.forEach((element) => {
-        let num = 0;
-
-        switch(element) {
-            case 'I':
-                num = 1;
-                break;
-            case 'V':
-                num = 5;
-                break;
-            case 'X':
-                num = 10;
-                break;
-            case 'L':
-                num = 50;
-                break;
-            case 'C':
-                num = 100;
-                break;
-            case 'D':
-                num = 500;
-                break;
-            case 'M':
-                num = 1000;
-                break;
-            case '+':
-                numArrayIndex++;
-                break;
-            default:
-                break;
-        }
-
-        if(isNaN(numArray[numArrayIndex])) {
-            numArray[numArrayIndex] = 0;
-        }
-        numArray[numArrayIndex] += num;
-
-
-    });
+    phrase = Array.from(phrase);
+    
+    let romeLetterObject = {
+        'M': 1000,
+        'D': 500,
+        'C': 100,
+        'L': 50,
+        'X': 10,
+        'V': 5,
+        'I': 1,
+    }
 
     let resultNumber = 0;
 
-    numArray.forEach((element) => {
-        resultNumber += element;
+    let stopper = false;
+    phrase.forEach((element, index) => {
+        resultNumber += romeLetterObject[element] === undefined ? 0 : romeLetterObject[element];
+
+        if(phrase[index+1] === 'V' && phrase[index] === 'I' ) {
+            resultNumber -= 2;
+        } 
+
+        if(phrase[index+1] === 'X' && phrase[index] === 'I' ) {
+            resultNumber -= 2;
+        } 
+
     });
 
     console.log(`The result is ${resultNumber}`);
+    
+    let romeNumber = new Array();
+
+    for(key in romeLetterObject) {
+        if(parseInt(resultNumber / romeLetterObject[key]) > 0) {
+            let counter = parseInt(resultNumber / romeLetterObject[key]);
+            romeNumber = romeNumber.concat(Array(counter).fill(key));
+            resultNumber -= counter * romeLetterObject[key];
+        }
+        
+        if(key === 'X' && parseInt(resultNumber % romeLetterObject[key]) === 9) {
+            romeNumber = romeNumber.concat(Array(1).fill('IX'));
+            resultNumber -= 9;
+        }
+
+        if(key === 'V' && (parseInt(resultNumber % romeLetterObject[key]) === 4)) {
+            romeNumber = romeNumber.concat(Array(1).fill('IV'));
+            resultNumber -= 4;
+        }
+
+    }
+    console.log(romeNumber.join(''));
+
     rl.close();
 });
