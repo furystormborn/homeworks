@@ -73,14 +73,14 @@ const getCartWithCallback = (cart, callback) => {
 
 const getCartWithPromise = async (cart, user) => {
 
-return new Promise( (res, rej)=> {
+    return new Promise( (res, rej)=> {
 
-if( cart.length < 0 ) {
-    rej(new Error('Your cart is empty'));
-}
-console.log(JSON.stringify(cart, null, 2));
-res(cart);
-});
+        if( cart.length < 0 ) {
+            rej(new Error('Your cart is empty'));
+        }
+        console.log(JSON.stringify(cart, null, 2));
+        res(cart);
+    });
 }
 
 const paymentOperationWithCallback = (user_cart, callback) => {
@@ -133,7 +133,6 @@ function run(type = 'callback') {
             console.log(JSON.stringify(user, null, 2));
             await addProductWithPromise(1, user);
             const cart = await getCartWithPromise(user.cart);
-
             const amount = await paymentOperationWithPromise(cart);
             console.log(amount);
         })();
