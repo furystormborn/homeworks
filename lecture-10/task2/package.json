@@ -1,0 +1,16 @@
+{
+  "name": "lecture-10",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "task2.js",
+  "scripts": {
+    "start": "ts-node task2.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
