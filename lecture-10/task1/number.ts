@@ -5,7 +5,16 @@ export class MyNumber {
     public power: number = 1;
 
     constructor(data: string = '') {
-        
+
+        if('' === data) {
+            return;
+        }
+
+        let dataMinus: boolean = false;
+        if( data.startsWith('!') === true ) {
+            dataMinus = true;
+            data = data.slice(1, data.length);
+        }
         let dataX: number = data.indexOf('x');
         let dataPower: number = data.indexOf('^');
         let numJoin: number = data.length;
@@ -20,13 +29,13 @@ export class MyNumber {
         }
 
         if(numJoin === 0) {
-            if(!dataX) {
-                this.num = 1;
-            } else {
-                this.num = 0;
-            }
+            this.num = 1;
         } else {
             this.num = parseInt(data.slice(0, numJoin));
+        }
+
+        if(dataMinus === true) {
+            this.num = parseInt('-'+this.num);
         }
 
     }
