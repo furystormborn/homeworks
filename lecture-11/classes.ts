@@ -168,7 +168,7 @@ export class Team {
         );
         
 
-        console.log( 'Project is done!' );
+        console.log( `Project ${clientData.projectName} is done!` );
         
     }
 }
