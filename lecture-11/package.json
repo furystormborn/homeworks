@@ -1,0 +1,19 @@
+{
+  "name": "lecture-10",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "task1.js",
+  "scripts": {
+    "start": "tsc && tsc-esm task1.js build/*.js && node build/task1.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "tsc-esm": "^1.0.4"
+  }
+}
